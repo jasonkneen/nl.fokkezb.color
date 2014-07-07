@@ -1,7 +1,7 @@
 /**
- * Exposes a view displaying the HSV color space that can have any size and
- * works with any default system unit. By tapping or dragging the user can
- * #change the selected color, which will be returned in HSV, RGB and HEX.
+ * Exposes a view displaying the HSV color space that can have any size and works
+ * with any default system unit. By tapping or dragging the user can #change the
+ * selected color, which will be returned in HSV, RGB and HEX.
  *
  * Inspired by: [https://github.com/JigarM/TiColorPicker/]()
  *
