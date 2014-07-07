@@ -1,7 +1,7 @@
 /**
- * Exposes a view displaying the HSV color space that can have any size. By
- * tapping or dragging the user can #change the selected color, which will
- * be returned in HSV, RGB and HEX.
+ * Exposes a view displaying the HSV color space that can have any size and
+ * works with any default system unit. By tapping or dragging the user can
+ * #change the selected color, which will be returned in HSV, RGB and HEX.
  *
  * Inspired by: [https://github.com/JigarM/TiColorPicker/]()
  *
@@ -62,7 +62,7 @@ $.getColor = getColor;
  */
 
 // private vars
-var imageRect, circleRect, color;
+var rect, unit, color;
 
 /**
  * Constructor for the widget.
@@ -97,8 +97,7 @@ function onPostlayout(e) { // jshint unused:false
 
   $.image.removeEventListener('postlayout', onPostlayout);
 
-  imageRect = $.image.rect;
-  circleRect = $.circle.rect;
+  rect = $.image.rect;
 
   if (color) {
     setCircle();
@@ -106,23 +105,39 @@ function onPostlayout(e) { // jshint unused:false
 }
 
 function onColorChange(e) {
-  var x = Math.max(0, Math.min(imageRect.width, e.x));
-  var y = Math.max(0, Math.min(imageRect.height, e.y));
+  var x = e.x,
+    y = e.y;
 
-  // position circle
-  $.circle.applyProperties({
+  // Android doesn't return these in system unit, but always in px
+  if (OS_ANDROID) {
+
+    var def = getDefaultUnit();
+
+    if (def !== Ti.UI.UNIT_PX) {
+      x = Ti.UI.convertUnits(x.toString() + 'px', def);
+      y = Ti.UI.convertUnits(y.toString() + 'px', def);
+    }
+  }
+
+  x = Math.max(0, Math.min(rect.width, x));
+  y = Math.max(0, Math.min(rect.height, y));
+
+  var p = {
     center: {
       x: x,
       y: y
     },
     borderColor: color.bw,
     visible: true
-  });
+  };
 
-  var imageThird = (imageRect.height / 3);
+  // position circle
+  $.circle.applyProperties(p);
+
+  var imageThird = (rect.height / 3);
 
   var hsv = {
-    h: Math.round((x / imageRect.width) * 359),
+    h: Math.round((x / rect.width) * 359),
     s: (y < imageThird) ? 100 : Math.max(0, Math.round(100 - (((y - imageThird) * 100) / imageThird))),
     v: (y < imageThird) ? Math.round((y * 100) / imageThird) : ((y > (imageThird * 2)) ? Math.round(100 - (((y - (2 * imageThird)) * 100) / imageThird)) : 100)
   };
@@ -201,8 +216,8 @@ function setCircle() {
 
     $.circle.applyProperties({
       center: {
-        x: Math.round((color.hsv.h * imageRect.width) / 359),
-        y: Math.round((yP * imageRect.height) / 300)
+        x: Math.round((color.hsv.h * rect.width) / 359),
+        y: Math.round((yP * rect.height) / 300)
       },
       visible: true,
       borderColor: color.bw
@@ -211,4 +226,29 @@ function setCircle() {
   } else {
     $.circle.hide();
   }
+}
+
+function getDefaultUnit() {
+
+  if (!unit) {
+
+    var defaultUnit = Ti.App.Properties.getString('ti.ui.defaultunit');
+
+    var units = {
+      'dp': Ti.UI.UNIT_DIP,
+      'dip': Ti.UI.UNIT_DIP,
+      'in': Ti.UI.UNIT_IN,
+      'cm': Ti.UI.UNIT_CM,
+      'mm': Ti.UI.UNIT_MM,
+      'px': Ti.UI.UNIT_PX
+    };
+
+    if (!units[defaultUnit]) {
+      throw 'Unknown ti.ui.defaultunit: ' + defaultUnit;
+    }
+
+    unit = units[defaultUnit];
+  }
+
+  return unit;
 }

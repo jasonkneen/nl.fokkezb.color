@@ -6,7 +6,7 @@
   width: 10,
   height: 10,
 
-  borderWidth: '2',
+  borderWidth: 2,
   borderColor: '#000',
   borderRadius: 5,
 
