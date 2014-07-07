@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Widgets",
+    "groups": [
+      {
+        "name": "nl.fokkezb.color",
+        "classes": [ "Widgets.nlFokkezbColor.*" ]
+      }
+    ]
+  }
+]
