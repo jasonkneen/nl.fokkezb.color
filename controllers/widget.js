@@ -127,17 +127,6 @@ function onColorChange(e) {
   x = Math.max(0, Math.min(rect.width, x));
   y = Math.max(0, Math.min(rect.height, y));
 
-  // position circle
-  $.circle.applyProperties({
-    center: {
-      x: x,
-      y: y
-    },
-    borderColor: color.bw
-  });
-
-  $.circle.show();
-
   var imageThird = (rect.height / 3);
 
   var hsv = {
@@ -157,6 +146,17 @@ function onColorChange(e) {
     hex: hex,
     bw: bw
   };
+
+  // position circle
+  $.circle.applyProperties({
+    center: {
+      x: x,
+      y: y
+    },
+    borderColor: bw
+  });
+
+  $.circle.show();
 
   // broadcast change
   $.trigger('change', color);
@@ -186,6 +186,11 @@ function parseColor(clr) {
   } else {
     hex = clr;
     rgb = $.convert.hex2rgb(hex);
+
+    if (!rgb) {
+      return;
+    }
+
     hsv = $.convert.rgb2hsv(rgb);
   }
 
