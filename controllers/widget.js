@@ -69,16 +69,23 @@ var rect, unit, color;
  *
  * @method  Controller
  * @param {Object} args  Arguments passed to the controller, which will be applied to the main view.
- * @param {Object|String} args.color  The color to set.
+ * @param {Object|String} [args.color]  The color to set.
+ * @param {Array} [args.children]       Child views to overlay.
  */
 (function constuctor(args) {
 
   if (args.color) {
-    parseColor(args.color);
+    setColor(args.color);
     delete args.color;
   }
 
-  $.image.applyProperties(_.omit(args, 'id'));
+  if (args.children) {
+    _.each(args.children, function(child) {
+      $.image.add(child);
+    });
+  }
+
+  $.image.applyProperties(_.omit(args, 'id', '__parentSymbol', '__itemTemplate', '$model', 'children'));
 
 })(arguments[0] || {});
 
@@ -99,9 +106,7 @@ function onPostlayout(e) { // jshint unused:false
 
   rect = $.image.rect;
 
-  if (color) {
-    setCircle();
-  }
+  setCircle();
 }
 
 function onColorChange(e) {
@@ -122,17 +127,16 @@ function onColorChange(e) {
   x = Math.max(0, Math.min(rect.width, x));
   y = Math.max(0, Math.min(rect.height, y));
 
-  var p = {
+  // position circle
+  $.circle.applyProperties({
     center: {
       x: x,
       y: y
     },
-    borderColor: color.bw,
-    visible: true
-  };
+    borderColor: color.bw
+  });
 
-  // position circle
-  $.circle.applyProperties(p);
+  $.circle.show();
 
   var imageThird = (rect.height / 3);
 
@@ -197,7 +201,7 @@ function parseColor(clr) {
 
 function setCircle() {
 
-  if (color) {
+  if (rect && color) {
 
     var yP;
 
@@ -219,9 +223,10 @@ function setCircle() {
         x: Math.round((color.hsv.h * rect.width) / 359),
         y: Math.round((yP * rect.height) / 300)
       },
-      visible: true,
       borderColor: color.bw
     });
+
+    $.circle.show();
 
   } else {
     $.circle.hide();

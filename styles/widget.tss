@@ -3,12 +3,12 @@
 }
 
 ".circle": {
-  width: 10,
-  height: 10,
+  width: 20,
+  height: 20,
 
-  borderWidth: 2,
-  borderColor: '#000',
-  borderRadius: 5,
+  borderWidth: 5,
+  borderColor: 'black',
+  borderRadius: 10,
 
   touchEnabled: false,
   visible: false
