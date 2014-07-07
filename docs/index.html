@@ -25,7 +25,99 @@
   <div id="loading"><span class="title">Alloy Color Picker Widget - Documentation</span><span class="logo"></span></div>
 
   <div id="header-content"><strong>Alloy Color Picker Widget </strong>Documentation</div>
-  <div id='welcome-content' style='display:none'><div class="markdown">
+  <div id='welcome-content' style='display:none'><div class="markdown"><h1>Alloy Color Picker Widget <a href="http://appcelerator.com/alloy/"><img src="http://www-static.appcelerator.com/badges/alloy-git-badge-sq.png" alt="Appcelerator Alloy" /></a></h1>
+
+<p>An <a href="http://appcelerator.com/alloy">Alloy</a> <a href="http://docs.appcelerator.com/titanium/latest/#!/guide/Alloy_Widgets">Widget</a> to display an HSV color space that can have any size. By tapping or dragging the user can change the selected color, which will be returned in HSV, RGB and HEX.</p>
+
+<ul>
+<li>Source code: <a href="https://github.com/FokkeZB/nl.fokkezb.color/tree/master">https://github.com/FokkeZB/nl.fokkezb.color/tree/master</a></li>
+<li>Documentation: <a href="http://color.fokkezb.nl">http://color.fokkezb.nl</a></li>
+<li>Test app: <a href="https://github.com/FokkeZB/nl.fokkezb.color/tree/test">https://github.com/FokkeZB/nl.fokkezb.color/tree/test</a></li>
+</ul>
+
+
+<h2>See it</h2>
+
+<p>A screenshot of the <a href="https://github.com/FokkeZB/nl.fokkezb.color/tree/test">test app</a> in which the actual widget is only the HSV color space image:</p>
+
+<p><img src="http://color.fokkezb.nl/screenshot.png" alt="Screenshot" /></p>
+
+<h2>Get it <a href="http://gitt.io/component/nl.fokkezb.color"><img src="http://gitt.io/badge.png" alt="gitTio" /></a></h2>
+
+<p>Install via <a href="http://gitt.io/component/nl.fokkezb.color">gitTio</a>:</p>
+
+<pre><code>$ gittio install nl.fokkezb.color
+</code></pre>
+
+<p>Or download a <a href="https://github.com/FokkeZB/nl.fokkezb.color/releases">release</a>, extract it to your app's <code>app/widgets/nl.fokkezb.color</code> folder and add the dependency to your <code>config.json</code>:</p>
+
+<pre><code>{
+    ..
+    "dependencies": {
+        "nl.fokkezb.color": "*"
+        ..
+      }
+}   
+</code></pre>
+
+<h2>Use it</h2>
+
+<p>See the following code form the <a href="https://github.com/FokkeZB/nl.fokkezb.color/tree/test">test app</a> and consult the <a href="http://color.fokkezb.nl">documentation</a> for more information.</p>
+
+<h3>index.xml</h3>
+
+<pre><code>&lt;Alloy&gt;
+  &lt;Window id="win" backgroundColor="#00FF00" fullscreen="true"&gt;
+    &lt;Label id="hex" width="Ti.UI.FILL" textAlign="Ti.UI.TEXT_ALIGNMENT_CENTER" top="0" height="40"&gt;#00FF00&lt;/Label&gt;
+        &lt;Widget id="widget" src="nl.fokkezb.color" onChange="onChange" color="#00FF00" top="40" bottom="40" left="40" right="40" /&gt;
+    &lt;/Window&gt;
+&lt;/Alloy&gt;
+</code></pre>
+
+<h3>index.js</h3>
+
+<pre><code>// $.widget.color = '#FF0000';
+
+$.win.open();
+
+function onChange(e) {
+  console.debug(JSON.stringify(e, null, '  '));
+
+  $.hex.applyProperties({
+    text: e.hex,
+    color: e.bw
+  });
+
+  $.win.backgroundColor = e.hex;
+
+  // var color = $.widget.color;
+}
+</code></pre>
+
+<h2>License</h2>
+
+<pre><code>The MIT License (MIT)
+
+Copyright (c) 2014 Fokke Zandbergen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</code></pre>
 </div></div>
             <div id='categories-content' style='display:none'>
             <div class='section'>
@@ -47,7 +139,7 @@
 
   
   
-  <div id='footer-content' style='display: none'>Generated on Mon 07 Jul 2014 10:28:12 by <a href='https://github.com/senchalabs/jsduck'>JSDuck</a> 5.3.4.</div>
+  <div id='footer-content' style='display: none'>Generated on Mon 07 Jul 2014 10:49:20 by <a href='https://github.com/senchalabs/jsduck'>JSDuck</a> 5.3.4.</div>
 
   
 
