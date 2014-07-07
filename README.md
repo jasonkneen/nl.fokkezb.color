@@ -7,7 +7,7 @@ An [Alloy](http://appcelerator.com/alloy) [Widget](http://docs.appcelerator.com/
 * Test app: [https://github.com/FokkeZB/nl.fokkezb.color/tree/test](https://github.com/FokkeZB/nl.fokkezb.color/tree/test)
 
 ## See it
-A screencast of the [test app](https://github.com/FokkeZB/nl.fokkezb.color/tree/test) in which the actual widget is only the HSV color space image:
+A screenshot of the [test app](https://github.com/FokkeZB/nl.fokkezb.color/tree/test) in which the actual widget is only the HSV color space image:
 
 ![Screenshot](http://color.fokkezb.nl/screenshot.png)
 
