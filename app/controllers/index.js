@@ -1,3 +1,13 @@
+var spectrum = 0;
+var spectrums = ['ghsv', 'hsvg', 'hsv'];
+
+$.win.backgroundColor = $.widget.color.hex;
+
+$.hex.applyProperties({
+  text: $.widget.color.hex,
+  color: 'black'
+});
+
 $.win.open();
 
 function onChange(e) {
@@ -9,4 +19,12 @@ function onChange(e) {
   });
 
   $.win.backgroundColor = e.hex;
+}
+
+function toggleSpace() {
+  spectrum = (spectrum === spectrums.length - 1) ? 0 : spectrum + 1;
+
+  $.widget.applyProperties({
+    spectrum: spectrums[spectrum]
+  });
 }

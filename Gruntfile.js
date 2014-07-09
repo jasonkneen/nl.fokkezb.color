@@ -18,7 +18,8 @@ module.exports = function(grunt) {
           command: 'build',
           platform: 'ios',
           logLevel: 'trace',
-          iosVersion: 7.1
+          iosVersion: 7.1,
+          shadow: true
         }
       }
     }
