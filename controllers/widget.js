@@ -65,6 +65,20 @@ $.setColor = setColor;
  */
 $.getColor = getColor;
 
+/**
+ * Show th color picker
+ */
+$.show = function () {
+  $.image.show();
+};
+
+/**
+ * Hide the color picker
+ */
+$.hide = function () {
+  $.image.hide();
+};
+
 $.applyProperties = applyProperties;
 
 /**
