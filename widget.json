@@ -3,7 +3,7 @@
 	"name": "Alloy Color Picker Widget",
 	"description" : "Color Picker that can have any size.",
 	"author": "Fokke Zandbergen",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"copyright":"Copyright (c) 2014 Fokke Zandbergen",
 	"license":"MIT",
 	"min-alloy-version": "1.3",
