@@ -225,6 +225,10 @@ function onColorChange(e) {
   $.trigger('change', color);
 }
 
+function onTouchend(e){
+  $.trigger('touchend', e);
+}
+
 function parseColor(clr) {
   var hsv, rgb, hex, bw;
 
